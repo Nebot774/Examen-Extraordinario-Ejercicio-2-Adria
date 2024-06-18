@@ -21,38 +21,40 @@ public class PokeAPI {
             .build();
     private static PokeAPIService service = retrofit.create(PokeAPIService.class);
 
-    public static void getMoveList(MutableLiveData<List<MoveListItem>> moveList){
-        Call<MoveList> pokeCall = service.getMoveList(844, 0);
-        pokeCall.enqueue(new Callback<MoveList>() {
+
+    // Nuevo método para obtener la lista de ítems
+    public static void getItemList(MutableLiveData<List<ItemListItem>> itemList){
+        Call<ItemList> pokeCall = service.getItemList(100, 0); // Ajustar los parámetros según sea necesario
+        pokeCall.enqueue(new Callback<ItemList>() {
             @Override
-            public void onResponse(@NonNull Call<MoveList> call, @NonNull Response<MoveList> response) {
+            public void onResponse(@NonNull Call<ItemList> call, @NonNull Response<ItemList> response) {
                 if (response.isSuccessful()) {
-                    MoveList list = response.body();
+                    ItemList list = response.body();
                     if (list != null) {
-                        moveList.setValue(list.getResults());
+                        itemList.setValue(list.getResults());
                     }
-
                 } else {
                     Log.e("QWERTY", " onResponse: " + response.errorBody());
                 }
             }
 
             @Override
-            public void onFailure(@NonNull Call<MoveList> call, @NonNull Throwable t) {
+            public void onFailure(@NonNull Call<ItemList> call, @NonNull Throwable t) {
                 Log.e("QWERTY", " onFailure: " + t.getMessage());
             }
         });
     }
 
-    public static void getMove(String name, MutableLiveData<Move> move) {
-        Call<Move> pokeCall = service.getMoveById(name);
-        pokeCall.enqueue(new Callback<Move>() {
+    // Nuevo método para obtener un ítem por su ID
+    public static void getItem(int id, MutableLiveData<Item> item) {
+        Call<Item> pokeCall = service.getItem(id);
+        pokeCall.enqueue(new Callback<Item>() {
             @Override
-            public void onResponse(@NonNull Call<Move> call, @NonNull Response<Move> response) {
+            public void onResponse(@NonNull Call<Item> call, @NonNull Response<Item> response) {
                 if (response.isSuccessful()) {
-                    Move p = response.body();
+                    Item p = response.body();
                     if (p != null) {
-                        move.setValue(p);
+                        item.setValue(p);
                     }
                 } else {
                     Log.e("QWERTY", " onResponse: " + response.errorBody());
@@ -60,11 +62,14 @@ public class PokeAPI {
             }
 
             @Override
-            public void onFailure(@NonNull Call<Move> call, @NonNull Throwable t) {
+            public void onFailure(@NonNull Call<Item> call, @NonNull Throwable t) {
                 Log.e("QWERTY", " onFailure: " + t.getMessage());
             }
         });
     }
+
+
+
 
 
 }

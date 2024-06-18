@@ -3,20 +3,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/moveListRecyclerFragment">
+    app:startDestination="@id/itemListRecyclerFragment">
+
 
     <fragment
-        android:id="@+id/moveListRecyclerFragment"
-        android:name="com.example.examenfinal.MoveListRecyclerFragment"
-        android:label="fragment_move_list_recycler"
-        tools:layout="@layout/fragment_move_list_recycler" >
+        android:id="@+id/itemListRecyclerFragment"
+        android:name="com.example.examenfinal.ItemListRecyclerFragment"
+        android:label="fragment_item_list_recycler"
+        tools:layout="@layout/fragment_item_list_recycler" >
         <action
-            android:id="@+id/action_moveListRecyclerFragment_to_moveDetailFragment"
-            app:destination="@id/moveDetailFragment" />
+            android:id="@+id/action_itemListRecyclerFragment_to_itemDetailFragment"
+            app:destination="@id/itemDetailFragment" />
     </fragment>
     <fragment
-        android:id="@+id/moveDetailFragment"
-        android:name="com.example.examenfinal.MoveDetailFragment"
-        android:label="fragment_move_detail"
-        tools:layout="@layout/fragment_move_detail" />
+        android:id="@+id/itemDetailFragment"
+        android:name="com.example.examenfinal.ItemDetailFragment"
+        android:label="fragment_item_detail"
+        tools:layout="@layout/fragment_item_detail" />
 </navigation>
