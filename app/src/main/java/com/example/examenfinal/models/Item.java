@@ -2,6 +2,7 @@ package com.example.examenfinal.models;
 
 import java.util.List;
 
+//Clase que representa la estructura de un item
 public class Item {
     private String name;
     private Category category;
@@ -9,6 +10,7 @@ public class Item {
     private List<EffectEntry> effect_entries;
     private Sprites sprites;
 
+    //clase interna para representar la categoria del item
     public static class Category {
         private String name;
 
@@ -17,6 +19,7 @@ public class Item {
         }
     }
 
+    //clase interna par representar los efectos de un item
     public static class EffectEntry {
         private String short_effect;
 
@@ -26,7 +29,7 @@ public class Item {
     }
 
     public static class Sprites {
-        private String defaultSprite; // Cambiado el nombre de 'default' a 'defaultSprite'
+        private String defaultSprite;
 
         public String getDefaultSprite() {
             return defaultSprite;
@@ -55,7 +58,7 @@ public class Item {
 
     // Método para obtener la URL de la imagen
     public String getImageUrl() {
-        // El nombre del ítem en la URL de la imagen suele estar en minúsculas
+
         String itemName = name.toLowerCase().replace(" ", "-");
         return "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/" + itemName + ".png";
     }

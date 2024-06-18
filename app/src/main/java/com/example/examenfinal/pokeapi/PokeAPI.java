@@ -22,7 +22,7 @@ public class PokeAPI {
     private static PokeAPIService service = retrofit.create(PokeAPIService.class);
 
 
-    // Nuevo método para obtener la lista de ítems
+    // Método para obtener la lista de ítems
     public static void getItemList(MutableLiveData<List<ItemListItem>> itemList){
         Call<ItemList> pokeCall = service.getItemList(100, 0); // Ajustar los parámetros según sea necesario
         pokeCall.enqueue(new Callback<ItemList>() {
@@ -45,7 +45,7 @@ public class PokeAPI {
         });
     }
 
-    // Nuevo método para obtener un ítem por su ID
+    // Método para obtener un ítem por su ID
     public static void getItem(int id, MutableLiveData<Item> item) {
         Call<Item> pokeCall = service.getItem(id);
         pokeCall.enqueue(new Callback<Item>() {

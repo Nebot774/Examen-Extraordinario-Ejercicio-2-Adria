@@ -19,6 +19,7 @@ import com.example.examenfinal.models.Item;
 import java.util.List;
 
 
+//clase que representa el detalle de un item
 public class ItemDetailFragment extends Fragment {
     private ItemViewModel itemViewModel;
     private TextView itemName;
@@ -32,19 +33,23 @@ public class ItemDetailFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_item_detail, container, false);
 
+        //referenciamos los elementos del layout
         itemName = view.findViewById(R.id.item_name);
         itemCategory = view.findViewById(R.id.item_category);
         itemCost = view.findViewById(R.id.item_cost);
         itemEffects = view.findViewById(R.id.item_effects);
-        itemImage = view.findViewById(R.id.item_image); // Referencia al ImageView
+        itemImage = view.findViewById(R.id.item_image);
 
+        //instancia del view model
         itemViewModel = new ViewModelProvider(requireActivity()).get(ItemViewModel.class);
 
+        //se llama al metodo para observar el item seleccionado
         observeSelectedItem();
 
         return view;
     }
 
+    //metodo para observar el item seleccionado y aplicarle los valores a los elementod de el layout
     private void observeSelectedItem() {
         itemViewModel.getSelectedItem().observe(getViewLifecycleOwner(), new Observer<Item>() {
             @Override
@@ -56,9 +61,9 @@ public class ItemDetailFragment extends Fragment {
                     itemEffects.setText(getEffectsString(item.getEffectEntries()));
 
                     String imageUrl = item.getImageUrl();
-                    Log.d("ItemDetailFragment", "Image URL: " + imageUrl); // Agregar Log para verificar la URL
+                    Log.d("ItemDetailFragment", "Image URL: " + imageUrl); //Log para verificar la URL
 
-                    // Cargar la imagen usando una biblioteca como Glide o Picasso
+                    // Cargar la imagen usando  Glide
                     Glide.with(getContext())
                             .load(item.getImageUrl())
                             .into(itemImage);
@@ -69,6 +74,7 @@ public class ItemDetailFragment extends Fragment {
         });
     }
 
+    //metodo para recorrer y asignarle los efectos a el item
     private String getEffectsString(List<Item.EffectEntry> effectEntries) {
         StringBuilder effects = new StringBuilder();
         for (Item.EffectEntry entry : effectEntries) {

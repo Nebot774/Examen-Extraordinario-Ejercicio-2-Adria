@@ -9,10 +9,11 @@ import com.example.examenfinal.models.*;
 public interface PokeAPIService {
     String BASE_URL = "https://pokeapi.co/api/v2/";
 
+    //Endpointpara obtener la lista de items
     @GET("item")
     Call<ItemList> getItemList(@Query("limit") int limit, @Query("offset") int offset);
 
-    // Nuevo método para obtener un ítem por su ID
+    //Método para obtener un ítem por su ID
     @GET("item/{id}")
     Call<Item> getItem(@Path("id") int id);
 

@@ -17,7 +17,7 @@ import com.example.examenfinal.models.ItemListItem;
 
 import java.util.List;
 
-
+//clase 
 public class ItemListRecyclerFragment extends Fragment {
 
     private ItemViewModel itemViewModel;
@@ -27,25 +27,24 @@ public class ItemListRecyclerFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        // Infla el layout del fragmento
         View view = inflater.inflate(R.layout.fragment_item_list_recycler, container, false);
 
+        // Inicializa el RecyclerView y configura su layout manager
         recyclerView = view.findViewById(R.id.item_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
+        // Obtiene el ViewModel asociado a la actividad
         itemViewModel = new ViewModelProvider(requireActivity()).get(ItemViewModel.class);
 
-        itemViewModel.getAllItems().observe(getViewLifecycleOwner(), new Observer<List<ItemListItem>>() {
-            @Override
-            public void onChanged(List<ItemListItem> items) {
-                adapter = new ItemRecyclerViewAdapter(items, new ItemRecyclerViewAdapter.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(ItemListItem item) {
-                        itemViewModel.select(item);
-                        Navigation.findNavController(view).navigate(R.id.action_itemListRecyclerFragment_to_itemDetailFragment);
-                    }
-                });
-                recyclerView.setAdapter(adapter);
-            }
+        // Observa los cambios en la lista de items y actualiza el adaptador
+        itemViewModel.getAllItems().observe(getViewLifecycleOwner(), items -> {
+            adapter = new ItemRecyclerViewAdapter(items, item -> {
+                // Selecciona el item y navega al detalle del item
+                itemViewModel.select(item);
+                Navigation.findNavController(view).navigate(R.id.action_itemListRecyclerFragment_to_itemDetailFragment);
+            });
+            recyclerView.setAdapter(adapter);
         });
 
         return view;

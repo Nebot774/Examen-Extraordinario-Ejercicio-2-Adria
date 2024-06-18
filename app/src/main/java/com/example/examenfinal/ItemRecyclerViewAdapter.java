@@ -19,15 +19,18 @@ public class ItemRecyclerViewAdapter extends RecyclerView.Adapter<ItemRecyclerVi
     private final List<ItemListItem> items;
     private final OnItemClickListener listener;
 
+    // Interfaz para manejar los clics en los items
     public interface OnItemClickListener {
         void onItemClick(ItemListItem item);
     }
 
+    // Constructor del adaptador
     public ItemRecyclerViewAdapter(List<ItemListItem> items, OnItemClickListener listener) {
         this.items = items;
         this.listener = listener;
     }
 
+    // Crea nuevas vistas (invocado por el layout manager)
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -36,16 +39,19 @@ public class ItemRecyclerViewAdapter extends RecyclerView.Adapter<ItemRecyclerVi
         return new ViewHolder(view);
     }
 
+    // Reemplaza el contenido de una vista (invocado por el layout manager)
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.bind(items.get(position), listener);
     }
 
+    // Retorna el tamaño de tu dataset (invocado por el layout manager)
     @Override
     public int getItemCount() {
         return items.size();
     }
 
+    // Proporciona una referencia a las vistas para cada item
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public final TextView itemName;
         private ImageView itemImage;
@@ -56,6 +62,7 @@ public class ItemRecyclerViewAdapter extends RecyclerView.Adapter<ItemRecyclerVi
             itemImage = view.findViewById(R.id.item_image);
         }
 
+        // Vincula los datos del item a las vistas
         public void bind(final ItemListItem item, final OnItemClickListener listener) {
             itemName.setText(item.getName());
 
@@ -64,6 +71,7 @@ public class ItemRecyclerViewAdapter extends RecyclerView.Adapter<ItemRecyclerVi
                     .load(item.getImageUrl())
                     .into(itemImage);
 
+            // Configurar el listener para el clic en el item
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -73,3 +81,4 @@ public class ItemRecyclerViewAdapter extends RecyclerView.Adapter<ItemRecyclerVi
         }
     }
 }
+

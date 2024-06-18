@@ -1,5 +1,6 @@
 package com.example.examenfinal.models;
 
+//clase que representa el elemento item que se mostrara el nombre el el recycler de items
 public class ItemListItem {
     private String name;
     private String url;
